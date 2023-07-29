@@ -3,15 +3,17 @@
 
 #include <string>
 #include <map>
+#include <memory>
+
+#include "command.h"
 
 using namespace std;
 
 class Board;
-class Command;
 
 class CommandManager
 {
-    map<string, Command*> commands;
+    map<string, unique_ptr<Command>> commands;
 
 public:
     CommandManager();

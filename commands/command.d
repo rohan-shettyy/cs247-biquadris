@@ -1,1 +1,1 @@
-command.o: command.cc command.h
+commands/command.o: commands/command.cc commands/command.h

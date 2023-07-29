@@ -1,6 +1,8 @@
-#include "dropcommand.h"
-
 #include <iostream>
+
+#include "../board.h"
+
+#include "dropcommand.h"
 
 using namespace std;
 
@@ -13,4 +15,5 @@ DropCommand::DropCommand()
 void DropCommand::Call(Board &board, string file)
 {
     cout << mincommand << endl;
+    board.turnInProgress = false;
 }

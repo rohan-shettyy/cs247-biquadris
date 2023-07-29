@@ -17,46 +17,67 @@
 #include "commandmanager.h"
 
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
 CommandManager::CommandManager()
 {
     // Add all the commands to the command manager
-    AddCommand("left", new LeftCommand());
-    AddCommand("right", new RightCommand());
-    AddCommand("down", new DownCommand());
-    AddCommand("clockwise", new ClockwiseCommand());
-    AddCommand("counterclockwise", new CounterclockwiseCommand());
-    AddCommand("drop", new DropCommand());
-    AddCommand("levelup", new LevelUpCommand());
-    AddCommand("leveldown", new LevelDownCommand());
-    AddCommand("norandom", new NorandomCommand());
-    AddCommand("random", new RandomCommand());
-    AddCommand("sequence", new SequenceCommand());
-    AddCommand("restart", new RestartCommand());
-    AddCommand("I", new BlockCommand('I'));
-    AddCommand("J", new BlockCommand('J'));
-    AddCommand("L", new BlockCommand('L'));
-    AddCommand("S", new BlockCommand('S'));
-    AddCommand("Z", new BlockCommand('Z'));
-    AddCommand("T", new BlockCommand('T'));
-    AddCommand("O", new BlockCommand('O'));
+
+    Command* cmd = new LeftCommand();
+    AddCommand("left", cmd);
+    cmd = new RightCommand();
+    AddCommand("right", cmd);
+    cmd = new DownCommand();
+    AddCommand("down", cmd);
+    cmd = new ClockwiseCommand();
+    AddCommand("clockwise", cmd);
+    cmd = new CounterclockwiseCommand();
+    AddCommand("counterclockwise", cmd);
+    cmd = new DropCommand();
+    AddCommand("drop", cmd);
+    cmd = new LevelUpCommand();
+    AddCommand("levelup", cmd);
+    cmd = new LevelDownCommand();
+    AddCommand("leveldown", cmd);
+    cmd = new NorandomCommand();
+    AddCommand("norandom", cmd);
+    cmd = new RandomCommand();
+    AddCommand("random", cmd);
+    cmd = new SequenceCommand();
+    AddCommand("sequence", cmd);
+    cmd = new RestartCommand();
+    AddCommand("restart", cmd);
+    cmd = new BlockCommand('I');
+    AddCommand("I", cmd);
+    cmd = new BlockCommand('J');
+    AddCommand("J", cmd);
+    cmd = new BlockCommand('L');
+    AddCommand("L", cmd);
+    cmd = new BlockCommand('S');
+    AddCommand("S", cmd);
+    cmd = new BlockCommand('Z');
+    AddCommand("Z", cmd);
+    cmd = new BlockCommand('T');
+    AddCommand("T", cmd);
+    cmd = new BlockCommand('O');
+    AddCommand("O", cmd);
 }
 
 void CommandManager::AddCommand(string fullcommand, Command* commandObj)
 {
-    for (auto cmd : commands)
+    for (auto& cmd : commands)
     {
         cmd.second->ComputeMinCommand(commandObj);
     }
 
-    commands.insert(pair<string, Command*>(fullcommand, commandObj));
+    commands.insert(make_pair(fullcommand, unique_ptr<Command>(commandObj)));
 }
 
 void CommandManager::CallCommand(Board &board, string command, int multiplicity)
 {
-    for (auto cmd : commands)
+    for (auto& cmd : commands)
     {
         if (cmd.second->CheckCommand(command))
         {
