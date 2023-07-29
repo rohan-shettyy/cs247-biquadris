@@ -1,6 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include <vector>
 #include "block.h"
 
 using namespace std;

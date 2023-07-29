@@ -1,0 +1,1 @@
+scoremanager.o: scoremanager.cc
