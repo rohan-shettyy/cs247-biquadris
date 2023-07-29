@@ -22,8 +22,8 @@ class Board
 
 public:
     bool turnInProgress = false;
-    
-    Board();
+
+    Board(string filename);
     Block generateBlock();
     void updateFilledRows(int);
     void restart();

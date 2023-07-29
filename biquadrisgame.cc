@@ -8,7 +8,7 @@
 
 using namespace std;
 
-BiquadrisGame::BiquadrisGame() : p1board{unique_ptr<Board>(new Board())}, p2board{unique_ptr<Board>(new Board())}, cmdManager{unique_ptr<CommandManager>(new CommandManager())}, p1turn{true} {}
+BiquadrisGame::BiquadrisGame() : p1board{unique_ptr<Board>(new Board("biquadris_sequence1.txt"))}, p2board{unique_ptr<Board>(new Board("biquadris_sequence2.txt"))}, cmdManager{unique_ptr<CommandManager>(new CommandManager())}, p1turn{true} {}
 
 void BiquadrisGame::Init()
 {
@@ -44,7 +44,8 @@ void BiquadrisGame::TakeTurn()
     }
     else
     {
-        activeBoard = *p2board;
+        Board& temp = *p2board;
+        swap(activeBoard, temp);
         cout << "Player 2's turn:" << endl;
     }
     activeBoard.turnInProgress = true;

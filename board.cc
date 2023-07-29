@@ -1,10 +1,11 @@
 #include <vector>
 #include <memory>
+#include <string>
 #include "board.h"
 #include "block.h"
 
 // Constructor
-Board::Board() : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}}, currBlock{nullptr}, nextBlock{nullptr}, level{}
+Board::Board(string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}}, currBlock{nullptr}, nextBlock{nullptr}, level{filename}
 {
 }
 
