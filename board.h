@@ -5,6 +5,7 @@
 #include <memory>
 #include "block.h"
 #include "level.h"
+#include "scoremanager.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ class Board
     shared_ptr<Block> currBlock;
     shared_ptr<Block> nextBlock;
     // BigquardisGame game;
-    // ScoreManager scoreManager;
+    ScoreManager scoreManager;
     // vector<Debuff> debuffs;
     // CommandManager commandManager;
     Level level;
@@ -26,9 +27,15 @@ public:
     Board(string filename);
     Block generateBlock();
     void updateFilledRows(int);
+    void Init();
     void restart();
     void addDebuff();
     void updateDebuffs();
+
+    const vector<vector<pair<char, shared_ptr<Block>>>>& GetGrid() const;
+    const int GetLevel() const;
+    const int GetScore() const;
+    const Block& GetNextBlock() const;
 };
 
 #endif

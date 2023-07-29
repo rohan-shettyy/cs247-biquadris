@@ -9,6 +9,12 @@ Board::Board(string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{
 {
 }
 
+void Board::Init()
+{
+    currBlock = make_shared<Block>(generateBlock());
+    nextBlock = make_shared<Block>(generateBlock());
+}
+
 Block Board::generateBlock()
 {
     return level.chooseBlock();
@@ -39,4 +45,24 @@ void Board::updateDebuffs()
 {
     // Implement the logic to update the debuffs on the board
     // Update the 'debuffs' vector or perform other necessary actions
+}
+
+const vector<vector<pair<char, shared_ptr<Block>>>>& Board::GetGrid() const
+{
+    return board;
+}
+
+const int Board::GetLevel() const
+{
+    return level.GetLevel();
+}
+
+const int Board::GetScore() const
+{
+    return scoreManager.GetScore();
+}
+
+const Block& Board::GetNextBlock() const
+{
+    return *nextBlock;
 }

@@ -20,6 +20,7 @@ public:
     void Restart();
     void Terminate();
     void TakeTurn();
+    void Print();
 };
 
 #endif

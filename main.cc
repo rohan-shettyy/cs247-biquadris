@@ -5,7 +5,7 @@
 #include <utility>
 #include "board.h"
 #include "block.h"
-// #include "commands/commandmanager.h"
+
 using namespace std;
 
 void printBlock(Block &s, vector<vector<char>> &grid, vector<pair<int, int>> &coords)

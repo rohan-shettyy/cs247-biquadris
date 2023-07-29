@@ -3,6 +3,7 @@
         "vector": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "stdexcept": "cpp"
     }
 }

@@ -12,8 +12,8 @@ BiquadrisGame::BiquadrisGame() : p1board{unique_ptr<Board>(new Board("biquadris_
 
 void BiquadrisGame::Init()
 {
-    // p1board->Init();
-    // p2board->Init();
+    p1board->Init();
+    p2board->Init();
     gameInProgress = true;
 
     while (gameInProgress)
@@ -51,9 +51,86 @@ void BiquadrisGame::TakeTurn()
     activeBoard.turnInProgress = true;
     while (activeBoard.turnInProgress)
     {
+        Print();
         string command;
         cin >> command;
         cmdManager->CallCommand(activeBoard, command);
     }
     p1turn = !p1turn;
+}
+
+void BiquadrisGame::Print()
+{
+    const vector<vector<pair<char, shared_ptr<Block>>>>& p1grid = p1board->GetGrid();
+    const vector<vector<pair<char, shared_ptr<Block>>>>& p2grid = p2board->GetGrid();
+    
+    cout << "Level:    " << p1board->GetLevel() << "      " << "Level:    " << p2board->GetLevel() << endl;
+    int p1score = p1board->GetScore();
+    int p2score = p2board->GetScore();
+    cout << "Score:";
+    for (int j = 0; j < 5 - (int)to_string(p1score).length(); j++)
+    {
+        cout << " ";
+    }
+    cout << p1score << "      ";
+    cout << "Score:";
+    for (int j = 0; j < 5 - (int)to_string(p2score).length(); j++)
+    {
+        cout << " ";
+    }
+    cout << p2score << endl;
+
+    cout << "-----------      -----------" << endl;
+
+    for (int i = 0; i < 18; i++)
+    {
+        for (int j = 0; j < 11; j++)
+        {
+            cout << p1grid[j][i].first;
+        }
+        cout << "      ";
+        for (int j = 0; j < 11; j++)
+        {
+            cout << p2grid[j][i].first;
+        }
+        cout << endl;
+    }
+
+    cout << "-----------      -----------" << endl;
+
+    const vector<pair<int, int>>& p1NextBlock = p1board->GetNextBlock().getCoords();
+    const vector<pair<int, int>>& p2NextBlock = p2board->GetNextBlock().getCoords();
+    char p1NextBlockGrid[2][4];
+    char p2NextBlockGrid[2][4];
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 4; j++) 
+        {
+            p1NextBlockGrid[i][j] = ' ';
+            p2NextBlockGrid[i][j] = ' ';
+        }
+    }
+    for (auto coord : p1NextBlock)
+    {
+        p1NextBlockGrid[coord.first - 2][coord.second] = p1board->GetNextBlock().GetType();
+    }
+    for (auto coord : p2NextBlock)
+    {
+        p2NextBlockGrid[coord.first - 2][coord.second] = p2board->GetNextBlock().GetType();
+    }
+
+    cout << "Next:            Next:" << endl;
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            cout << p1NextBlockGrid[i][j];
+        }
+        cout << "             ";
+        for (int j = 0; j < 4; j++)
+        {
+            cout << p2NextBlockGrid[i][j];
+        }
+        cout << endl;
+    }
 }

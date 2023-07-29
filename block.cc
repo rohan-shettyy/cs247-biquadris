@@ -25,47 +25,46 @@ Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -
     switch (type)
     {
     case 'I':
-        coords[0] = {2, 0};
-        coords[1] = {2, 1};
-        coords[2] = {2, 2};
-        coords[3] = {2, 3};
+        coords[0] = {3, 0};
+        coords[1] = {3, 1};
+        coords[2] = {3, 2};
+        coords[3] = {3, 3};
         break;
     case 'J':
-        bottomLeft = {2, 0};
-        coords[0] = {2, 0};
-        coords[1] = {2, 1};
-        coords[2] = {2, 2};
-        coords[3] = {1, 0};
+        coords[0] = {3, 0};
+        coords[1] = {3, 1};
+        coords[2] = {3, 2};
+        coords[3] = {2, 0};
         break;
     case 'L':
-        coords[0] = {2, 0};
-        coords[1] = {2, 1};
-        coords[2] = {2, 2};
-        coords[3] = {1, 2};
+        coords[0] = {3, 0};
+        coords[1] = {3, 1};
+        coords[2] = {3, 2};
+        coords[3] = {2, 2};
         break;
     case 'O':
-        coords[0] = {2, 0};
-        coords[1] = {2, 1};
-        coords[2] = {1, 0};
-        coords[3] = {1, 1};
+        coords[0] = {3, 0};
+        coords[1] = {3, 1};
+        coords[2] = {2, 0};
+        coords[3] = {2, 1};
         break;
     case 'S':
-        coords[0] = {2, 0};
-        coords[1] = {2, 1};
-        coords[2] = {1, 1};
-        coords[3] = {1, 2};
+        coords[0] = {3, 0};
+        coords[1] = {3, 1};
+        coords[2] = {2, 1};
+        coords[3] = {2, 2};
         break;
     case 'Z':
-        coords[0] = {2, 1};
-        coords[1] = {2, 2};
-        coords[2] = {1, 0};
-        coords[3] = {1, 1};
+        coords[0] = {3, 1};
+        coords[1] = {3, 2};
+        coords[2] = {2, 0};
+        coords[3] = {2, 1};
         break;
     case 'T':
-        coords[0] = {2, 1};
-        coords[1] = {1, 0};
-        coords[2] = {1, 1};
-        coords[3] = {1, 2};
+        coords[0] = {3, 1};
+        coords[1] = {2, 0};
+        coords[2] = {2, 1};
+        coords[3] = {2, 2};
         break;
     default:
         throw runtime_error("Created invalid block type got: " + type);
@@ -174,7 +173,12 @@ void Block::drop(Board &b)
     }
 }
 
-vector<pair<int, int>> &Block::getCoords()
+const vector<pair<int, int>> &Block::getCoords() const
 {
     return coords;
+}
+
+const char Block::GetType() const
+{
+    return type;
 }

@@ -21,7 +21,8 @@ public:
     void rotate(bool);
     void shift(char);
     void drop(Board &);
-    vector<pair<int, int>> &getCoords();
+    const vector<pair<int, int>> &getCoords() const;
+    const char GetType() const;
     pair<int, int> &getLeft()
     {
         return bottomLeft;

@@ -18,6 +18,7 @@ class Level
 public:
     Level(string filename);
     Block chooseBlock();
+    const int GetLevel() const;
     void setLevel(int);
     void SetNoRandomFlag(bool flag);
 };

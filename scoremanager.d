@@ -1,1 +1,1 @@
-scoremanager.o: scoremanager.cc
+scoremanager.o: scoremanager.cc scoremanager.h

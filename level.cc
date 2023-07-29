@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-Level::Level(string filename) : difficulty(1), turnsWithoutClearing(0), sequence{filename}
+Level::Level(string filename) : difficulty{0}, turnsWithoutClearing{0}, sequence{filename}
 {
     // Constructor implementation
 }
@@ -26,6 +26,11 @@ Block Level::chooseBlock()
     Block chosenBlock{tileType, difficulty};
     // Return the generated block
     return chosenBlock;
+}
+
+const int Level::GetLevel() const
+{
+    return difficulty;
 }
 
 void Level::setLevel(int level)
