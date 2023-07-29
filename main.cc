@@ -1,20 +1,52 @@
 #include <iostream>
-
+#include <vector>
+#include <utility>
 #include "board.h"
-#include "commands/commandmanager.h"
-
+#include "block.h"
+// #include "commands/commandmanager.h"
 using namespace std;
 
-int main(int argc, char** argv)
+void printBlock(Block &s, vector<vector<char>> &grid, vector<pair<int, int>> &coords)
 {
-    Board board = Board();
+    cout << "Printing grid" << endl;
+    coords = s.getCoords();
+    grid = vector<vector<char>>(18, vector<char>(11, '_'));
+    for (auto c : coords)
+    {
+        grid[c.first][c.second] = 'X';
+    }
+    for (int i = 0; i < 18; i++)
+    {
+        for (int j = 0; j < 11; j++)
+        {
+            cout << grid[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
 
-    CommandManager commandManager = CommandManager();
+int main(int argc, char **argv)
+{
+    // Board board = Board();
+    Block s = Block('S', 1);
+
+    vector<vector<char>> grid;
+    vector<pair<int, int>> coords;
+
+    // printBlock(s, grid, coords);
+    // s.rotate(true);
+    // printBlock(s, grid, coords);
+
+    /*s.rotate(false);
+    cout << "grid: clockwise" << endl;
+    printBlock(s, grid, coords);*/
+
+    /*CommandManager commandManager = CommandManager();
 
     commandManager.CallCommand(board, "left");
     commandManager.CallCommand(board, "levelup");
     commandManager.CallCommand(board, "L");
     commandManager.CallCommand(board, "ri");
     commandManager.CallCommand(board, "re");
-    commandManager.CallCommand(board, "ran");
+    commandManager.CallCommand(board, "ran");*/
 }
