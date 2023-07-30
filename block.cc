@@ -20,7 +20,7 @@ bool checkBounds(vector<pair<int, int>> &coords)
     return true;
 }
 
-Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}}, bottomLeft{2, 0}, type{type}, level{level}
+Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}}, bottomLeft{3, 0}, type{type}, level{level}
 {
     switch (type)
     {
@@ -119,7 +119,7 @@ void Block::rotate(bool clockwise)
 
     if (!checkBounds(newCoords))
     {
-        return;
+        //return;
     }
     // update the coords
     for (int i = 0; i < 4; i++)

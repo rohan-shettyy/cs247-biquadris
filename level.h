@@ -18,8 +18,8 @@ class Level
 public:
     Level(string filename);
     Block chooseBlock();
-    const int GetLevel() const;
-    void setLevel(int);
+    const int GetDifficulty() const;
+    void SetLevel(int);
     void SetNoRandomFlag(bool flag);
 };
 

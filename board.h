@@ -31,11 +31,13 @@ public:
     void restart();
     void addDebuff();
     void updateDebuffs();
+    void UpdateNextBlock();
 
     const vector<vector<pair<char, shared_ptr<Block>>>>& GetGrid() const;
     const int GetLevel() const;
+    void SetLevel(int);
     const int GetScore() const;
-    const Block& GetCurrBlock() const;
+    Block& GetCurrBlock() const;
     const Block& GetNextBlock() const;
 };
 

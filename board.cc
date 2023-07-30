@@ -47,6 +47,12 @@ void Board::updateDebuffs()
     // Update the 'debuffs' vector or perform other necessary actions
 }
 
+void Board::UpdateNextBlock()
+{
+    currBlock = nextBlock;
+    nextBlock = make_shared<Block>(generateBlock());
+}
+
 const vector<vector<pair<char, shared_ptr<Block>>>>& Board::GetGrid() const
 {
     return board;
@@ -54,7 +60,12 @@ const vector<vector<pair<char, shared_ptr<Block>>>>& Board::GetGrid() const
 
 const int Board::GetLevel() const
 {
-    return level.GetLevel();
+    return level.GetDifficulty();
+}
+
+void Board::SetLevel(int l)
+{
+    level.SetLevel(l);
 }
 
 const int Board::GetScore() const
@@ -62,7 +73,7 @@ const int Board::GetScore() const
     return scoreManager.GetScore();
 }
 
-const Block& Board::GetCurrBlock() const
+Block& Board::GetCurrBlock() const
 {
     return *currBlock;
 }

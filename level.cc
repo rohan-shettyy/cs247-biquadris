@@ -28,12 +28,12 @@ Block Level::chooseBlock()
     return chosenBlock;
 }
 
-const int Level::GetLevel() const
+const int Level::GetDifficulty() const
 {
     return difficulty;
 }
 
-void Level::setLevel(int level)
+void Level::SetLevel(int level)
 {
     difficulty = level;
 }
