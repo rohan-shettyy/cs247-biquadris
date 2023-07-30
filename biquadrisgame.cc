@@ -8,7 +8,10 @@
 
 using namespace std;
 
-BiquadrisGame::BiquadrisGame() : p1board{unique_ptr<Board>(new Board("biquadris_sequence1.txt"))}, p2board{unique_ptr<Board>(new Board("biquadris_sequence2.txt"))}, cmdManager{unique_ptr<CommandManager>(new CommandManager())}, p1turn{true} {}
+BiquadrisGame::BiquadrisGame() :    p1board{unique_ptr<Board>(new Board(shared_ptr<BiquadrisGame>(this), "biquadris_sequence1.txt"))}, 
+                                    p2board{unique_ptr<Board>(new Board(shared_ptr<BiquadrisGame>(this), "biquadris_sequence2.txt"))},
+                                    cmdManager{unique_ptr<CommandManager>(new CommandManager())},
+                                    p1turn{true} {}
 
 void BiquadrisGame::Init()
 {
@@ -28,11 +31,17 @@ void BiquadrisGame::Restart()
     // p2board->Restart();
 }
 
-void BiquadrisGame::Terminate()
+void BiquadrisGame::Terminate(Board& board)
 {
-    // p1board->Terminate();
-    // p2board->Terminate();
     gameInProgress = false;
+    if (&board == p1board.get())
+    {
+        cout << "Player 2 wins!" << endl;
+    }
+    else
+    {
+        cout << "Player 1 wins!" << endl;
+    }
 }
 
 void BiquadrisGame::TakeTurn()

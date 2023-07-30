@@ -9,12 +9,14 @@
 
 using namespace std;
 
+class BiquadrisGame;
+
 class Board
 {
     vector<vector<pair<char, shared_ptr<Block>>>> board;
     shared_ptr<Block> currBlock;
     shared_ptr<Block> nextBlock;
-    // BigquardisGame game;
+    shared_ptr<BiquadrisGame> game;
     ScoreManager scoreManager;
     // vector<Debuff> debuffs;
     // CommandManager commandManager;
@@ -23,7 +25,7 @@ class Board
 public:
     bool turnInProgress = false;
 
-    Board(string filename);
+    Board(shared_ptr<BiquadrisGame> game, string filename);
     Block generateBlock();
     void updateFilledRows(int);
     void Init();

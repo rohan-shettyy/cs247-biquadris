@@ -18,7 +18,7 @@ public:
 
     void Init();
     void Restart();
-    void Terminate();
+    void Terminate(Board&);
     void TakeTurn();
     void Print();
 };
