@@ -1,11 +1,18 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "board.h"
+
+#include "biquadrisgame.h"
 #include "block.h"
 
+#include "board.h"
+
 // Constructor
-Board::Board(string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}}, currBlock{nullptr}, nextBlock{nullptr}, level{filename}
+Board::Board(shared_ptr<BiquadrisGame> game, string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
+                                                                currBlock{nullptr},
+                                                                nextBlock{nullptr},
+                                                                game{game},
+                                                                level{filename}
 {
 }
 
@@ -56,6 +63,15 @@ void Board::updateDebuffs()
 void Board::UpdateNextBlock()
 {
     currBlock = nextBlock;
+    for (auto coord : currBlock->getCoords())
+    {
+        if (board[coord.first][coord.second].first != ' ')
+        {
+            // game over
+            game->Terminate(*this);
+            return;
+        }
+    }
     nextBlock = make_shared<Block>(generateBlock());
 }
 
