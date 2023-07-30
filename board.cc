@@ -62,6 +62,11 @@ const int Board::GetScore() const
     return scoreManager.GetScore();
 }
 
+const Block& Board::GetCurrBlock() const
+{
+    return *currBlock;
+}
+
 const Block& Board::GetNextBlock() const
 {
     return *nextBlock;

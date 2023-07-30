@@ -35,6 +35,7 @@ public:
     const vector<vector<pair<char, shared_ptr<Block>>>>& GetGrid() const;
     const int GetLevel() const;
     const int GetScore() const;
+    const Block& GetCurrBlock() const;
     const Block& GetNextBlock() const;
 };
 
