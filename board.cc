@@ -11,6 +11,8 @@ Board::Board(string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{
 
 void Board::Init()
 {
+    currBlock = make_shared<Block>(generateBlock());
+    nextBlock = make_shared<Block>(generateBlock());
 }
 
 Block Board::generateBlock()

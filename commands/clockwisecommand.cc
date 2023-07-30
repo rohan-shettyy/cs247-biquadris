@@ -12,5 +12,5 @@ ClockwiseCommand::ClockwiseCommand()
 
 void ClockwiseCommand::Call(Board &board, string file)
 {
-    board.GetCurrBlock().rotate(true);
+    board.GetCurrBlock().rotate(true, board);
 }
