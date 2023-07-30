@@ -76,7 +76,7 @@ void Board::UpdateNextBlock()
 }
 
 // assuming we can add the block to the board and there is no overlap
-void Board::addBlock(shared_ptr<Block> blockPtr)
+void Board::AddBlock(shared_ptr<Block> blockPtr)
 {
     vector<pair<int, int>> coords = blockPtr->getCoords();
     for (int i = 0; i < static_cast<int>(coords.size()); i++)

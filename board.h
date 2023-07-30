@@ -33,7 +33,7 @@ public:
     void addDebuff();
     void updateDebuffs();
     void UpdateNextBlock();
-    void addBlock(shared_ptr<Block>);
+    void AddBlock(shared_ptr<Block>);
 
     const vector<vector<pair<char, shared_ptr<Block>>>> &GetGrid() const;
     const int GetLevel() const;

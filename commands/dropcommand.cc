@@ -1,3 +1,4 @@
+#include <memory>
 #include "../board.h"
 
 #include "dropcommand.h"
@@ -13,7 +14,7 @@ DropCommand::DropCommand()
 void DropCommand::Call(Board &board, string file)
 {
     board.GetCurrBlock().drop(board);
-    //board.AddBlock(board.GetCurrBlock());
+    board.AddBlock(shared_ptr<Block>(&board.GetCurrBlock()));
     board.turnInProgress = false;
     board.UpdateNextBlock();
 }
