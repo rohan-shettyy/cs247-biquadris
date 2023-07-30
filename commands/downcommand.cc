@@ -12,5 +12,5 @@ DownCommand::DownCommand()
 
 void DownCommand::Call(Board &board, string file)
 {
-    board.GetCurrBlock().shift('d');
+    board.GetCurrBlock().shift('d', board);
 }

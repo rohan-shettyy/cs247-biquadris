@@ -12,5 +12,5 @@ LeftCommand::LeftCommand()
 
 void LeftCommand::Call(Board &board, string file)
 {
-    board.GetCurrBlock().shift('l');
+    board.GetCurrBlock().shift('l', board);
 }

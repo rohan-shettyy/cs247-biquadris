@@ -51,15 +51,12 @@ void Board::updateDebuffs()
     // Update the 'debuffs' vector or perform other necessary actions
 }
 
-<<<<<<< HEAD
 void Board::UpdateNextBlock()
 {
     currBlock = nextBlock;
     nextBlock = make_shared<Block>(generateBlock());
 }
 
-const vector<vector<pair<char, shared_ptr<Block>>>>& Board::GetGrid() const
-=======
 // assuming we can add the block to the board and there is no overlap
 void Board::addBlock(shared_ptr<Block> blockPtr)
 {
@@ -74,7 +71,6 @@ void Board::addBlock(shared_ptr<Block> blockPtr)
 }
 
 const vector<vector<pair<char, shared_ptr<Block>>>> &Board::GetGrid() const
->>>>>>> dae24002b06a1e0deb7e00b0b4b81a0dd144500c
 {
     return board;
 }
@@ -94,16 +90,12 @@ const int Board::GetScore() const
     return scoreManager.GetScore();
 }
 
-<<<<<<< HEAD
 Block& Board::GetCurrBlock() const
 {
     return *currBlock;
 }
 
 const Block& Board::GetNextBlock() const
-=======
-const Block &Board::GetNextBlock() const
->>>>>>> dae24002b06a1e0deb7e00b0b4b81a0dd144500c
 {
     return *nextBlock;
 }

@@ -12,5 +12,5 @@ RightCommand::RightCommand()
 
 void RightCommand::Call(Board &board, string file)
 {
-    board.GetCurrBlock().shift('r');
+    board.GetCurrBlock().shift('r', board);
 }
