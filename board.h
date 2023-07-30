@@ -12,7 +12,6 @@ using namespace std;
 class Board
 {
     vector<vector<pair<char, shared_ptr<Block>>>> board;
-    vector<shared_ptr<Block>> blocks;
     shared_ptr<Block> currBlock;
     shared_ptr<Block> nextBlock;
     // BigquardisGame game;
@@ -31,12 +30,12 @@ public:
     void restart();
     void addDebuff();
     void updateDebuffs();
+    void addBlock(shared_ptr<Block>);
 
-    const vector<vector<pair<char, shared_ptr<Block>>>>& GetGrid() const;
+    const vector<vector<pair<char, shared_ptr<Block>>>> &GetGrid() const;
     const int GetLevel() const;
     const int GetScore() const;
-    const Block& GetCurrBlock() const;
-    const Block& GetNextBlock() const;
+    const Block &GetNextBlock() const;
 };
 
 #endif

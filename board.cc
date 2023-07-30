@@ -11,8 +11,6 @@ Board::Board(string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{
 
 void Board::Init()
 {
-    currBlock = make_shared<Block>(generateBlock());
-    nextBlock = make_shared<Block>(generateBlock());
 }
 
 Block Board::generateBlock()
@@ -30,7 +28,13 @@ void Board::restart()
 {
     // Implement the logic to restart the game
     // Reset the board and other necessary data members
-    blocks.clear();
+    for (int i = 0; i < 18; i++)
+    {
+        for (int j = 0; j < 11; j++)
+        {
+            board[i][j] = {' ', nullptr};
+        }
+    }
     currBlock = nullptr;
     nextBlock = nullptr;
 }
@@ -47,7 +51,20 @@ void Board::updateDebuffs()
     // Update the 'debuffs' vector or perform other necessary actions
 }
 
-const vector<vector<pair<char, shared_ptr<Block>>>>& Board::GetGrid() const
+// assuming we can add the block to the board and there is no overlap
+void Board::addBlock(shared_ptr<Block> blockPtr)
+{
+    vector<pair<int, int>> coords = blockPtr->getCoords();
+    for (int i = 0; i < static_cast<int>(coords.size()); i++)
+    {
+        int row = coords[i].first;
+        int col = coords[i].second;
+        shared_ptr<Block> copiedPtr = blockPtr;
+        board[row][col] = {blockPtr->GetType(), copiedPtr};
+    }
+}
+
+const vector<vector<pair<char, shared_ptr<Block>>>> &Board::GetGrid() const
 {
     return board;
 }
@@ -62,12 +79,7 @@ const int Board::GetScore() const
     return scoreManager.GetScore();
 }
 
-const Block& Board::GetCurrBlock() const
-{
-    return *currBlock;
-}
-
-const Block& Board::GetNextBlock() const
+const Block &Board::GetNextBlock() const
 {
     return *nextBlock;
 }

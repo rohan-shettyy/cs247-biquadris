@@ -1,10 +1,25 @@
 #include <utility>
 #include <stdexcept>
 #include <vector>
+#include <iostream>
 #include "board.h"
 #include "block.h"
 
 using namespace std;
+
+bool checkBoard(vector<pair<int, int>> &coords, Board &board)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        int row = coords[i].first;
+        int col = coords[i].second;
+        if (board.GetGrid()[row][col].second != nullptr)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 bool checkBounds(vector<pair<int, int>> &coords)
 {
@@ -20,7 +35,7 @@ bool checkBounds(vector<pair<int, int>> &coords)
     return true;
 }
 
-Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}}, bottomLeft{2, 0}, type{type}, level{level}
+Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}}, bottomLeft{3, 0}, type{type}, level{level}
 {
     switch (type)
     {
@@ -71,7 +86,7 @@ Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -
     }
 }
 
-void Block::rotate(bool clockwise)
+void Block::rotate(bool clockwise, Board &board)
 {
     vector<pair<int, int>> newCoords{4};
     pair<int, int> pivotOffset = {0, 0};
@@ -85,14 +100,16 @@ void Block::rotate(bool clockwise)
         if (clockwise)
         {
             pivotOffset = {max(pivotOffset.first, relRow), max(pivotOffset.second, relCol)};
+            int temp = relRow;
             relRow = relCol;
-            relCol = -1 * relRow;
+            relCol = -1 * temp;
         }
         else
         {
             pivotOffset = {min(pivotOffset.first, relRow), min(pivotOffset.second, relCol)};
+            int temp = relRow;
             relRow = -1 * relCol;
-            relCol = relRow;
+            relCol = temp;
         }
         newCoords[i] = {relRow, relCol};
     }
@@ -117,7 +134,7 @@ void Block::rotate(bool clockwise)
         newCoords[i] = {actualRow, actualCol};
     }
 
-    if (!checkBounds(newCoords))
+    if (!checkBounds(newCoords) || !checkBoard(newCoords, board))
     {
         return;
     }
@@ -128,7 +145,7 @@ void Block::rotate(bool clockwise)
     }
 }
 
-void Block::shift(char direction)
+void Block::shift(char direction, Board &board)
 {
     pair<int, int> shift;
     switch (direction)
@@ -154,7 +171,7 @@ void Block::shift(char direction)
         newCoords[i] = {coords[i].first + shift.first, coords[i].second + shift.second};
     }
 
-    if (!checkBounds(newCoords))
+    if (!checkBounds(newCoords) || !checkBoard(newCoords, board))
     {
         return;
     }
@@ -165,11 +182,22 @@ void Block::shift(char direction)
     }
 }
 
-void Block::drop(Board &b)
+void Block::drop(Board &board)
 {
-    vector<pair<int, int>> newCoords = coords;
-    for (int i = 0; i < 4; i++)
+    if (checkBounds(coords) && checkBoard(coords, board))
     {
+        vector<pair<int, int>> newCoords = coords;
+        while (checkBounds(newCoords) && checkBoard(newCoords, board))
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                newCoords[i].first++;
+            }
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            coords[i].first = newCoords[i].first - 1;
+        }
     }
 }
 
