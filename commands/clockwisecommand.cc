@@ -1,6 +1,6 @@
-#include "clockwisecommand.h"
+#include "../board.h"
 
-#include <iostream>
+#include "clockwisecommand.h"
 
 using namespace std;
 
@@ -12,5 +12,5 @@ ClockwiseCommand::ClockwiseCommand()
 
 void ClockwiseCommand::Call(Board &board, string file)
 {
-    cout << mincommand << endl;
+    board.GetCurrBlock().rotate(true);
 }

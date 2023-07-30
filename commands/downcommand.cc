@@ -1,6 +1,6 @@
-#include "downcommand.h"
+#include "../board.h"
 
-#include <iostream>
+#include "downcommand.h"
 
 using namespace std;
 
@@ -12,5 +12,5 @@ DownCommand::DownCommand()
 
 void DownCommand::Call(Board &board, string file)
 {
-    cout << mincommand << endl;
+    board.GetCurrBlock().shift('d');
 }

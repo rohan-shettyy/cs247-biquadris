@@ -1,6 +1,6 @@
-#include "leftcommand.h"
+#include "../board.h"
 
-#include <iostream>
+#include "leftcommand.h"
 
 using namespace std;
 
@@ -12,5 +12,5 @@ LeftCommand::LeftCommand()
 
 void LeftCommand::Call(Board &board, string file)
 {
-    cout << mincommand << endl;
+    board.GetCurrBlock().shift('l');
 }

@@ -1,6 +1,6 @@
-#include "rightcommand.h"
+#include "../board.h"
 
-#include <iostream>
+#include "rightcommand.h"
 
 using namespace std;
 
@@ -12,5 +12,5 @@ RightCommand::RightCommand()
 
 void RightCommand::Call(Board &board, string file)
 {
-    cout << mincommand << endl;
+    board.GetCurrBlock().shift('r');
 }

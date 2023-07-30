@@ -1,6 +1,6 @@
-#include "levelupcommand.h"
+#include "../board.h"
 
-#include <iostream>
+#include "levelupcommand.h"
 
 using namespace std;
 
@@ -12,5 +12,9 @@ LevelUpCommand::LevelUpCommand()
 
 void LevelUpCommand::Call(Board &board, string file)
 {
-    cout << mincommand << endl;
+    const int level = board.GetLevel();
+    if (level < 4)
+    {
+        board.SetLevel(level + 1);
+    }
 }
