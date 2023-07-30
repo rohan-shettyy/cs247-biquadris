@@ -202,9 +202,9 @@ void Block::drop(Board &board)
         {
             for (int i = 0; i < 4; i++)
             {
-                coords[i].first += shift;
+                coords[i].first += (shift - 1);
             }
-            bottomLeft.first += shift;
+            bottomLeft.first += (shift - 1);
         }
     }
 }
