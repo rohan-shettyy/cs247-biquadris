@@ -11,8 +11,8 @@
 Board::Board(shared_ptr<BiquadrisGame> game, string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
                                                                 currBlock{nullptr},
                                                                 nextBlock{nullptr},
-                                                                level{filename},
-                                                                game{game}
+                                                                game{game},
+                                                                level{filename}
 {
 }
 
