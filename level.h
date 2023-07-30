@@ -14,9 +14,10 @@ class Level
 
     bool noRandom = false; // norandom command controls this in level 3 and 4
     ifstream sequence;
+    Board &board;
 
 public:
-    Level(string filename);
+    Level(string filename, Board& board);
     Block chooseBlock();
     const int GetDifficulty() const;
     void SetLevel(int);

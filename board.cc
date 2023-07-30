@@ -8,11 +8,12 @@
 #include "board.h"
 
 // Constructor
-Board::Board(shared_ptr<BiquadrisGame> game, string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
+Board::Board(BiquadrisGame* game, string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
                                                                 currBlock{nullptr},
                                                                 nextBlock{nullptr},
                                                                 game{game},
-                                                                level{filename}
+                                                                scoreManager{make_unique<ScoreManager>()},
+                                                                level{filename, *this}
 {
 }
 
@@ -76,15 +77,15 @@ void Board::UpdateNextBlock()
 }
 
 // assuming we can add the block to the board and there is no overlap
-void Board::AddBlock(shared_ptr<Block> blockPtr)
+void Board::AddBlock(Block& block)
 {
-    vector<pair<int, int>> coords = blockPtr->getCoords();
+    vector<pair<int, int>> coords = block.getCoords();
     for (int i = 0; i < static_cast<int>(coords.size()); i++)
     {
         int row = coords[i].first;
         int col = coords[i].second;
-        shared_ptr<Block> copiedPtr = blockPtr;
-        board[row][col] = {blockPtr->GetType(), copiedPtr};
+        shared_ptr<Block> copiedPtr = make_shared<Block>(block);
+        board[row][col] = pair<char, shared_ptr<Block>>(block.GetType(), copiedPtr);
     }
 }
 
@@ -105,7 +106,7 @@ void Board::SetLevel(int l)
 
 const int Board::GetScore() const
 {
-    return scoreManager.GetScore();
+    return scoreManager->GetScore();
 }
 
 Block& Board::GetCurrBlock() const
@@ -116,4 +117,9 @@ Block& Board::GetCurrBlock() const
 const Block& Board::GetNextBlock() const
 {
     return *nextBlock;
+}
+
+BiquadrisGame& Board::GetGame() const
+{
+    return *game;
 }

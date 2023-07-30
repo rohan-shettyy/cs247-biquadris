@@ -21,6 +21,8 @@ public:
     void Terminate(Board&);
     void TakeTurn();
     void Print();
+
+    void SetGameInProgress(bool inProgress);
 };
 
 #endif

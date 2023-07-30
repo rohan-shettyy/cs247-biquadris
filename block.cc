@@ -13,7 +13,7 @@ bool checkBoard(vector<pair<int, int>> &coords, Board &board)
     {
         int row = coords[i].first;
         int col = coords[i].second;
-        if (board.GetGrid()[row][col].second != nullptr)
+        if (board.GetGrid()[row][col].first != ' ')
         {
             return false;
         }
@@ -27,7 +27,7 @@ bool checkBounds(vector<pair<int, int>> &coords)
     {
         int row = coords[i].first;
         int col = coords[i].second;
-        if (row < 0 || row >= 11 || col < 0 || col >= 18)
+        if (row < 0 || row >= 18 || col < 0 || col >= 11)
         {
             return false; // we make no modification
         }
@@ -82,7 +82,7 @@ Block::Block(char type, int level) : coords{{-1, -1}, {-1, -1}, {-1, -1}, {-1, -
         coords[3] = {2, 2};
         break;
     default:
-        throw runtime_error("Created invalid block type got: " + type);
+        break;
     }
 }
 

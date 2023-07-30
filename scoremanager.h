@@ -5,9 +5,12 @@ using namespace std;
 
 class ScoreManager
 {
-    static int hiScore;
     int score;
 public:
+    static int hiScore;
+
+    ScoreManager();
+
     void update(int, int);
 
     const int GetScore() const;

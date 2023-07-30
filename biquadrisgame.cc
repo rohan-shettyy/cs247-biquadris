@@ -8,10 +8,13 @@
 
 using namespace std;
 
-BiquadrisGame::BiquadrisGame() :    p1board{unique_ptr<Board>(new Board(shared_ptr<BiquadrisGame>(this), "biquadris_sequence1.txt"))}, 
-                                    p2board{unique_ptr<Board>(new Board(shared_ptr<BiquadrisGame>(this), "biquadris_sequence2.txt"))},
+BiquadrisGame::BiquadrisGame() :    p1board{unique_ptr<Board>(new Board(this, "biquadris_sequence1.txt"))}, 
+                                    p2board{unique_ptr<Board>(new Board(this, "biquadris_sequence2.txt"))},
                                     cmdManager{unique_ptr<CommandManager>(new CommandManager())},
-                                    p1turn{true} {}
+                                    p1turn{true}
+                                    {
+                                        ScoreManager::hiScore = 0;
+                                    }
 
 void BiquadrisGame::Init()
 {
@@ -57,7 +60,7 @@ void BiquadrisGame::TakeTurn()
         cout << "Player 2's turn:" << endl;
     }
     activeBoard->turnInProgress = true;
-    while (activeBoard->turnInProgress)
+    while (activeBoard->turnInProgress && gameInProgress)
     {
         Print();
         string command;
@@ -108,7 +111,7 @@ void BiquadrisGame::Print()
             }
             if (!inCurrBlock)
             {
-                cout << p1grid[j][i].first;
+                cout << p1grid[i][j].first;
             }
         }
         cout << "      ";
@@ -125,7 +128,7 @@ void BiquadrisGame::Print()
             }
             if (!inCurrBlock)
             {
-                cout << p2grid[j][i].first;
+                cout << p2grid[i][j].first;
             }
         }
         cout << endl;
@@ -168,4 +171,9 @@ void BiquadrisGame::Print()
         }
         cout << endl;
     }
+}
+
+void BiquadrisGame::SetGameInProgress(bool inProgress)
+{
+    gameInProgress = inProgress;
 }

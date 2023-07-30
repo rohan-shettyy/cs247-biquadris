@@ -1,9 +1,13 @@
-#include "level.h"
 #include <cstdlib> // For rand() function
 #include <string>
-#include <iostream>
 
-Level::Level(string filename) : difficulty{0}, turnsWithoutClearing{0}, sequence{filename}
+#include "biquadrisgame.h"
+#include "board.h"
+
+#include "level.h"
+
+
+Level::Level(string filename, Board& board) : difficulty{0}, turnsWithoutClearing{0}, sequence{filename}, board{board}
 {
     // Constructor implementation
 }
@@ -15,7 +19,11 @@ Block Level::chooseBlock()
     char tileType;
     if (difficulty == 0) 
     {
-        sequence >> tileType;
+        if (!(sequence >> tileType))
+        {
+            board.GetGame().SetGameInProgress(false);
+            tileType = ' ';
+        }
     }
     else
     {

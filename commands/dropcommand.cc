@@ -14,7 +14,7 @@ DropCommand::DropCommand()
 void DropCommand::Call(Board &board, string file)
 {
     board.GetCurrBlock().drop(board);
-    board.AddBlock(shared_ptr<Block>(&board.GetCurrBlock()));
+    board.AddBlock(board.GetCurrBlock());
     board.turnInProgress = false;
     board.UpdateNextBlock();
 }
