@@ -136,7 +136,7 @@ void Block::rotate(bool clockwise, Board &board)
 
     if (!checkBounds(newCoords) || !checkBoard(newCoords, board))
     {
-        //return;
+        // return;
     }
     // update the coords
     for (int i = 0; i < 4; i++)
@@ -180,23 +180,31 @@ void Block::shift(char direction, Board &board)
     {
         coords[i] = newCoords[i];
     }
+    bottomLeft = {bottomLeft.first + shift.first,
+                  bottomLeft.second + shift.second};
 }
 
 void Block::drop(Board &board)
 {
     if (checkBounds(coords) && checkBoard(coords, board))
     {
+        int shift = 0;
         vector<pair<int, int>> newCoords = coords;
         while (checkBounds(newCoords) && checkBoard(newCoords, board))
         {
+            shift++;
             for (int i = 0; i < 4; i++)
             {
                 newCoords[i].first++;
             }
         }
-        for (int i = 0; i < 4; i++)
+        if (shift > 0)
         {
-            coords[i].first = newCoords[i].first - 1;
+            for (int i = 0; i < 4; i++)
+            {
+                coords[i].first += shift;
+            }
+            bottomLeft.first += shift;
         }
     }
 }
