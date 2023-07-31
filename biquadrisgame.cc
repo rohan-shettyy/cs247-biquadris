@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <sstream>
 
 #include "board.h"
 #include "commands/commandmanager.h"
@@ -74,13 +75,22 @@ void BiquadrisGame::TakeTurn()
     while (gameInProgress && activeBoard->turnInProgress)
     {
         Print();
+        string input;
+        int mult;
         string command;
-        if (!useSequence || !(sequenceIn >> command))
+        if (!(GetInputStream() >> input))
         {
-            useSequence = false;
-            cin >> command;
+            gameInProgress = false;
+            return;
         }
-        cmdManager->CallCommand(*activeBoard, command);
+        istringstream iss{input};
+        if (!(iss >> mult))
+        {
+            mult = 1;
+        }
+        iss.clear();
+        iss >> command;
+        cmdManager->CallCommand(*activeBoard, command, mult);
 
     }
     p1turn = !p1turn;

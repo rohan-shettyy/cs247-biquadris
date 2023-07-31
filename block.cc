@@ -153,11 +153,6 @@ void Block::rotate(bool clockwise, Board &board)
     {
         orientation = (orientation + 3) % 4;
     }
-
-    if (board.GetLevel() >= 3)
-    {
-        shift('d', board);
-    }
 }
 
 void Block::shift(char direction, Board &board)
@@ -197,24 +192,6 @@ void Block::shift(char direction, Board &board)
     }
     bottomLeft = {bottomLeft.first + shift.first,
                   bottomLeft.second + shift.second};
-
-    if (direction == 'r' || direction == 'l')
-    {
-        if (board.isHeavy)
-        {
-            pair<int, int> currLeft = getLeft();
-            this->shift('d', board);
-            this->shift('d', board);
-            if (getLeft().first - currLeft.first < 2)
-            {
-                board.GetGame().cmdManager->CallCommand(board, "drop");
-            }
-        }
-        else if (board.GetLevel() >= 3)
-        {
-            this->shift('d', board);
-        }
-    }
 }
 
 void Block::drop(Board &board)

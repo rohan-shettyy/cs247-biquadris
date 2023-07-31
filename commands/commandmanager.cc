@@ -1,6 +1,8 @@
 #include <map>
 
+#include "../biquadrisgame.h"
 #include "blockcommand.h"
+#include "../board.h"
 #include "clockwisecommand.h"
 #include "counterclockwisecommand.h"
 #include "downcommand.h"
@@ -84,6 +86,28 @@ void CommandManager::CallCommand(Board &board, string command, int multiplicity)
             for (int i = 0; i < multiplicity; i++)
             {
                 cmd.second->Call(board);
+            }
+            if (cmd.first == "left" || cmd.first == "right" || cmd.first == "clockwise" || cmd.first == "counterclockwise")
+            {
+                if (board.isHeavy)
+                {
+                    if (cmd.first == "left" || cmd.first == "right")
+                    {
+                        pair<int, int> currLeft = board.GetCurrBlock().getLeft();
+                        board.GetCurrBlock().shift('d', board);
+                        board.GetCurrBlock().shift('d', board);
+                        if (board.GetCurrBlock().getLeft().first - currLeft.first < 2)
+                        {
+                            board.GetGame().cmdManager->CallCommand(board, "drop");
+                        }
+                        return;
+                    }
+                }
+                if (board.GetLevel() >= 3)
+                {
+                    board.GetCurrBlock().shift('d', board);
+                    return;
+                }
             }
             return;
         }
