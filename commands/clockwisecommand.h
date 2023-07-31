@@ -7,7 +7,7 @@ class ClockwiseCommand : public Command
 {
 public:
     ClockwiseCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

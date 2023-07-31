@@ -10,7 +10,7 @@ LeftCommand::LeftCommand()
     mincommand = "l";
 }
 
-void LeftCommand::Call(Board &board, string file)
+void LeftCommand::Call(Board &board)
 {
     board.GetCurrBlock().shift('l', board);
 }

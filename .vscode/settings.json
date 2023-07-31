@@ -5,6 +5,10 @@
         "ostream": "cpp",
         "span": "cpp",
         "stdexcept": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "numeric": "cpp",
+        "fstream": "cpp"
     }
 }

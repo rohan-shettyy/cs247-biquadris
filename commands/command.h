@@ -16,7 +16,7 @@ protected:
 public:
     Command();
     void ComputeMinCommand(Command* other);
-    virtual void Call(Board &board, string file = "") = 0;
+    virtual void Call(Board &board) = 0;
     bool CheckCommand(string command);
 };
 

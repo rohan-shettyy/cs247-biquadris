@@ -10,7 +10,7 @@ LevelDownCommand::LevelDownCommand()
     mincommand = "l";
 }
 
-void LevelDownCommand::Call(Board &board, string file)
+void LevelDownCommand::Call(Board &board)
 {
     const int level = board.GetLevel();
     if (level > 0)

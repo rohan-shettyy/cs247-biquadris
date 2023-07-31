@@ -7,7 +7,7 @@ class RightCommand : public Command
 {
 public:
     RightCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

@@ -7,7 +7,7 @@ class RestartCommand : public Command
 {
 public:
     RestartCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

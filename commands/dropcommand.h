@@ -7,7 +7,7 @@ class DropCommand : public Command
 {
 public:
     DropCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

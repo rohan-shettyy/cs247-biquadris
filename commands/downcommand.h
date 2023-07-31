@@ -7,7 +7,7 @@ class DownCommand : public Command
 {
 public:
     DownCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

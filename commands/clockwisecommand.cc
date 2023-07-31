@@ -10,7 +10,7 @@ ClockwiseCommand::ClockwiseCommand()
     mincommand = "c";
 }
 
-void ClockwiseCommand::Call(Board &board, string file)
+void ClockwiseCommand::Call(Board &board)
 {
     board.GetCurrBlock().rotate(true, board);
 }

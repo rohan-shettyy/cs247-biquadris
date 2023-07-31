@@ -7,7 +7,7 @@ class SequenceCommand : public Command
 {
 public:
     SequenceCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

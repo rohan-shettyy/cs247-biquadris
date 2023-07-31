@@ -7,7 +7,7 @@ class RandomCommand : public Command
 {
 public:
     RandomCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

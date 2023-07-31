@@ -10,10 +10,11 @@ using namespace std;
 class Level
 {
     int difficulty;
-    int turnsWithoutClearing;
+    int turnsWithoutClearing; // TODO: Difficulty 4
 
     bool noRandom = false; // norandom command controls this in level 3 and 4
     ifstream sequence;
+    ifstream norandomin;
     Board &board;
 
 public:
@@ -21,7 +22,7 @@ public:
     Block chooseBlock();
     const int GetDifficulty() const;
     void SetLevel(int);
-    void SetNoRandomFlag(bool flag);
+    void SetNoRandomFlag(bool flag, string filename);
 };
 
 #endif

@@ -7,6 +7,11 @@
 class BiquadrisGame
 {
     bool gameInProgress = false;
+    bool shouldRestart = false;
+    bool useSequence = false;
+    
+    ifstream& sequenceIn;
+
 public:
     unique_ptr<Board> p1board;
     unique_ptr<Board> p2board;
@@ -14,7 +19,7 @@ public:
 
     bool p1turn;
 
-    BiquadrisGame();
+    BiquadrisGame(ifstream& in);
 
     void Init();
     void Restart();
@@ -23,6 +28,9 @@ public:
     void Print();
 
     void SetGameInProgress(bool inProgress);
+
+    istream& GetInputStream();
+    void SetSequence(string filename);
 };
 
 #endif

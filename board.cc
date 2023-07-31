@@ -89,6 +89,11 @@ void Board::AddBlock(Block& block)
     }
 }
 
+void Board::SetNoRandom(bool flag, string filename)
+{
+    level.SetNoRandomFlag(flag, filename);
+}
+
 const vector<vector<pair<char, shared_ptr<Block>>>> &Board::GetGrid() const
 {
     return board;

@@ -1,6 +1,9 @@
-#include "norandomcommand.h"
-
 #include <iostream>
+
+#include "../biquadrisgame.h"
+#include "../board.h"
+
+#include "norandomcommand.h"
 
 using namespace std;
 
@@ -10,7 +13,9 @@ NorandomCommand::NorandomCommand()
     mincommand = "n";
 }
 
-void NorandomCommand::Call(Board &board, string file)
+void NorandomCommand::Call(Board &board)
 {
-    cout << mincommand << endl;
+    string file;
+    board.GetGame().GetInputStream() >> file;
+    board.SetNoRandom(true, file);
 }

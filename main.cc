@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     /*s.rotate(false);
     cout << "grid: clockwise" << endl;
     printBlock(s, grid, coords);*/
-
-    BiquadrisGame game = BiquadrisGame();
+    ifstream in;
+    BiquadrisGame game = BiquadrisGame(in);
     game.Init();
 }

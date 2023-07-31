@@ -10,7 +10,7 @@ DownCommand::DownCommand()
     mincommand = "d";
 }
 
-void DownCommand::Call(Board &board, string file)
+void DownCommand::Call(Board &board)
 {
     board.GetCurrBlock().shift('d', board);
 }

@@ -8,13 +8,14 @@
 
 using namespace std;
 
-BiquadrisGame::BiquadrisGame() :    p1board{unique_ptr<Board>(new Board(this, "biquadris_sequence1.txt"))}, 
-                                    p2board{unique_ptr<Board>(new Board(this, "biquadris_sequence2.txt"))},
-                                    cmdManager{unique_ptr<CommandManager>(new CommandManager())},
-                                    p1turn{true}
-                                    {
-                                        ScoreManager::hiScore = 0;
-                                    }
+BiquadrisGame::BiquadrisGame(ifstream& in) :    sequenceIn{in},
+                                                p1board{unique_ptr<Board>(new Board(this, "biquadris_sequence1.txt"))}, 
+                                                p2board{unique_ptr<Board>(new Board(this, "biquadris_sequence2.txt"))},
+                                                cmdManager{unique_ptr<CommandManager>(new CommandManager())},
+                                                p1turn{true}
+                                                {
+                                                    ScoreManager::hiScore = 0;
+                                                }
 
 void BiquadrisGame::Init()
 {
@@ -26,12 +27,22 @@ void BiquadrisGame::Init()
     {
         TakeTurn();
     }
+    if (shouldRestart)
+    {
+        shouldRestart = false;
+        Init();
+    }
 }
 
 void BiquadrisGame::Restart()
 {
-    // p1board->Restart();
-    // p2board->Restart();
+    p1board->turnInProgress = false;
+    p2board->turnInProgress = false;
+    p1board.reset(new Board(this, "biquadris_sequence1.txt"));
+    p2board.reset(new Board(this, "biquadris_sequence2.txt"));
+    p1turn = false; // will toggle in TakeTurn()
+    gameInProgress = false;
+    shouldRestart = true;
 }
 
 void BiquadrisGame::Terminate(Board& board)
@@ -60,12 +71,17 @@ void BiquadrisGame::TakeTurn()
         cout << "Player 2's turn:" << endl;
     }
     activeBoard->turnInProgress = true;
-    while (activeBoard->turnInProgress && gameInProgress)
+    while (gameInProgress && activeBoard->turnInProgress)
     {
         Print();
         string command;
-        cin >> command;
+        if (!useSequence || !(sequenceIn >> command))
+        {
+            useSequence = false;
+            cin >> command;
+        }
         cmdManager->CallCommand(*activeBoard, command);
+
     }
     p1turn = !p1turn;
 }
@@ -176,4 +192,23 @@ void BiquadrisGame::Print()
 void BiquadrisGame::SetGameInProgress(bool inProgress)
 {
     gameInProgress = inProgress;
+}
+
+istream& BiquadrisGame::GetInputStream()
+{
+    if (useSequence)
+    {
+        return sequenceIn;
+    }
+    else
+    {
+        return cin;
+    }
+}
+
+void BiquadrisGame::SetSequence(string filename)
+{
+    sequenceIn.close();
+    sequenceIn.open(filename);
+    useSequence = true;
 }

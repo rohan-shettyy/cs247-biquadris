@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool checkBoard(vector<pair<int, int>> &coords, Board &board)
+bool Block::checkBoard(const vector<pair<int, int>> &coords, Board &board)
 {
     for (int i = 0; i < 4; i++)
     {
@@ -21,7 +21,7 @@ bool checkBoard(vector<pair<int, int>> &coords, Board &board)
     return true;
 }
 
-bool checkBounds(vector<pair<int, int>> &coords)
+bool Block::checkBounds(const vector<pair<int, int>> &coords)
 {
     for (int i = 0; i < 4; i++)
     {
@@ -143,6 +143,16 @@ void Block::rotate(bool clockwise, Board &board)
     {
         coords[i] = newCoords[i];
     }
+    // update the orientation
+    if (clockwise)
+    {
+        orientation = (orientation + 1) % 4;
+    }
+    else
+    {
+        orientation = (orientation + 3) % 4;
+    }
+
 }
 
 void Block::shift(char direction, Board &board)
@@ -209,12 +219,28 @@ void Block::drop(Board &board)
     }
 }
 
-const vector<pair<int, int>> &Block::getCoords() const
+const vector<pair<int, int>>& Block::getCoords() const
 {
     return coords;
+}
+
+void Block::ShiftCoords(int r, int c)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        coords[i].first += r;
+        coords[i].second += c;
+    }
+    bottomLeft.first += r;
+    bottomLeft.second += c;
 }
 
 const char Block::GetType() const
 {
     return type;
+}
+
+pair<int, int> Block::getLeft() const
+{
+    return bottomLeft;
 }

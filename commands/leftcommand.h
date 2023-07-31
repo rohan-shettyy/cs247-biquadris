@@ -7,7 +7,7 @@ class LeftCommand : public Command
 {
 public:
     LeftCommand();
-    void Call(Board &board, string file = "") override;
+    void Call(Board &board) override;
 };
 
 #endif

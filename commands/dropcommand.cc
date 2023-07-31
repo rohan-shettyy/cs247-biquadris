@@ -11,7 +11,7 @@ DropCommand::DropCommand()
     mincommand = "d";
 }
 
-void DropCommand::Call(Board &board, string file)
+void DropCommand::Call(Board &board)
 {
     board.GetCurrBlock().drop(board);
     board.AddBlock(board.GetCurrBlock());

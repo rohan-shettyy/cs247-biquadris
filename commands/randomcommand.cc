@@ -1,6 +1,6 @@
-#include "randomcommand.h"
+#include "../board.h"
 
-#include <iostream>
+#include "randomcommand.h"
 
 using namespace std;
 
@@ -10,7 +10,7 @@ RandomCommand::RandomCommand()
     mincommand = "r";
 }
 
-void RandomCommand::Call(Board &board, string file)
+void RandomCommand::Call(Board &board)
 {
-    cout << mincommand << endl;
+    board.SetNoRandom(false);
 }

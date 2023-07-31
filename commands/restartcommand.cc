@@ -1,6 +1,7 @@
-#include "restartcommand.h"
+#include "../biquadrisgame.h"
+#include "../board.h"
 
-#include <iostream>
+#include "restartcommand.h"
 
 using namespace std;
 
@@ -10,7 +11,7 @@ RestartCommand::RestartCommand()
     mincommand = "r";
 }
 
-void RestartCommand::Call(Board &board, string file)
+void RestartCommand::Call(Board &board)
 {
-    cout << mincommand << endl;
+    board.GetGame().Restart();
 }
