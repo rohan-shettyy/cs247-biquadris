@@ -25,6 +25,10 @@ class Board
 public:
     bool turnInProgress = false;
 
+    // Debuff flags
+    bool isBlinded = false;
+    bool isHeavy = false;
+
     Board(BiquadrisGame* game, string filename);
     Block generateBlock();
     void updateFilledRows(int);

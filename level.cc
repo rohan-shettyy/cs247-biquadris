@@ -21,8 +21,9 @@ Block Level::chooseBlock()
     {
         if (!(sequence >> tileType))
         {
-            board.GetGame().SetGameInProgress(false);
-            tileType = ' ';
+            sequence.clear();
+            sequence.seekg(0);
+            sequence >> tileType;
         }
     }
     else if (difficulty == 1)

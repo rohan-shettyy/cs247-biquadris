@@ -116,35 +116,49 @@ void BiquadrisGame::Print()
     {
         for (int j = 0; j < 11; j++)
         {
-            bool inCurrBlock = false;
-            for (auto coord : p1CurrBlock)
+            if (p2board->isBlinded && 2 <= j && j <= 8 && 5 <= i && i <= 14)
             {
-                if (coord.first == i && coord.second == j)
-                {
-                    cout << p1board->GetCurrBlock().GetType();
-                    inCurrBlock = true;
-                }
+                cout << "?";
             }
-            if (!inCurrBlock)
+            else
             {
-                cout << p1grid[i][j].first;
+                bool inCurrBlock = false;
+                for (auto coord : p1CurrBlock)
+                {
+                    if (coord.first == i && coord.second == j)
+                    {
+                        cout << p1board->GetCurrBlock().GetType();
+                        inCurrBlock = true;
+                    }
+                }
+                if (!inCurrBlock)
+                {
+                    cout << p1grid[i][j].first;
+                }
             }
         }
         cout << "      ";
         for (int j = 0; j < 11; j++)
         {
-            bool inCurrBlock = false;
-            for (auto coord : p2CurrBlock)
+            if (p2board->isBlinded && 2 <= j && j <= 8 && 5 <= i && i <= 14)
             {
-                if (coord.first == i && coord.second == j)
-                {
-                    cout << p2board->GetCurrBlock().GetType();
-                    inCurrBlock = true;
-                }
+                cout << "?";
             }
-            if (!inCurrBlock)
+            else
             {
-                cout << p2grid[i][j].first;
+                bool inCurrBlock = false;
+                for (auto coord : p2CurrBlock)
+                {
+                    if (coord.first == i && coord.second == j)
+                    {
+                        cout << p2board->GetCurrBlock().GetType();
+                        inCurrBlock = true;
+                    }
+                }
+                if (!inCurrBlock)
+                {
+                    cout << p2grid[i][j].first;
+                }
             }
         }
         cout << endl;
