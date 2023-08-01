@@ -7,7 +7,7 @@
 #include "level.h"
 
 
-Level::Level(string filename, Board& board) : difficulty{0}, turnsWithoutClearing{0}, sequence{filename}, board{board}
+Level::Level(string filename, Board& board) : difficulty{0}, sequence{filename}, board{board}
 {
     // Constructor implementation
 }
@@ -145,6 +145,10 @@ const int Level::GetDifficulty() const
 void Level::SetLevel(int level)
 {
     difficulty = level;
+    if (level != 4)
+    {
+        turnsWithoutClearing = 0;
+    }
 }
 
 void Level::SetNoRandomFlag(bool flag, string filename)

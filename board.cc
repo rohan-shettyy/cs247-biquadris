@@ -82,6 +82,19 @@ pair<int, int> Board::UpdateFilledRows()
             it++;
         }
     }
+    if (count == 0 && GetLevel() == 4)
+    {
+        level.turnsWithoutClearing++;
+        if (level.turnsWithoutClearing == 5)
+        {
+            level.turnsWithoutClearing = 0;
+            Block blocker = Block('*', 4);
+            blocker.drop(*this);
+            AddBlock(blocker);
+            pair<int, int> scoreData = UpdateFilledRows();
+            UpdateScore(scoreData.first, scoreData.second);
+        }
+    }
     return {count, bonus};
 }
 

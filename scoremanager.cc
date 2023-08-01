@@ -7,6 +7,10 @@ void ScoreManager::update(int level, int rowsCleared, int blocksCleared)
     int rowScore = (rowsCleared + level) * (rowsCleared + level);
     int bonusPoints = blocksCleared > 0 ? (blocksCleared + 1) * (blocksCleared + 1) : 0;
     score += rowScore + bonusPoints;
+    if (score > ScoreManager::hiScore)
+    {
+        ScoreManager::hiScore = score;
+    }
 }
 
 const int ScoreManager::GetScore() const
