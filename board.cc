@@ -82,19 +82,6 @@ pair<int, int> Board::UpdateFilledRows()
             it++;
         }
     }
-    if (count == 0 && GetLevel() == 4)
-    {
-        level.turnsWithoutClearing++;
-        if (level.turnsWithoutClearing == 5)
-        {
-            level.turnsWithoutClearing = 0;
-            Block blocker = Block('*', 4);
-            blocker.drop(*this);
-            AddBlock(blocker);
-            pair<int, int> scoreData = UpdateFilledRows();
-            UpdateScore(scoreData.first, scoreData.second);
-        }
-    }
     return {count, bonus};
 }
 
@@ -111,18 +98,6 @@ void Board::Restart()
     }
     currBlock = nullptr;
     nextBlock = nullptr;
-}
-
-void Board::AddDebuff()
-{
-    // Implement the logic to add a debuff to the board
-    // Update the 'debuffs' vector or perform other necessary actions
-}
-
-void Board::UpdateDebuffs()
-{
-    // Implement the logic to update the debuffs on the board
-    // Update the 'debuffs' vector or perform other necessary actions
 }
 
 void Board::UpdateScore(int rows, int blocksCleared)
@@ -162,6 +137,27 @@ void Board::AddBlock(Block &block)
 void Board::SetNoRandom(bool flag, string filename)
 {
     level.SetNoRandomFlag(flag, filename);
+}
+
+void Board::CheckAddAsteriskBlock(bool didClearRow)
+{
+    if (didClearRow)
+    {
+        level.turnsWithoutClearing = 0;
+    }
+    else
+    {
+        level.turnsWithoutClearing++;
+        if (level.turnsWithoutClearing == 5)
+        {
+            level.turnsWithoutClearing = 0;
+            Block blocker = Block('*', 4);
+            blocker.drop(*this);
+            AddBlock(blocker);
+            pair<int, int> scoreData = UpdateFilledRows();
+            UpdateScore(scoreData.first, scoreData.second);
+        }
+    }
 }
 
 const vector<vector<pair<char, shared_ptr<Block>>>> &Board::GetGrid() const

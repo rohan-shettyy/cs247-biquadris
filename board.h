@@ -35,12 +35,11 @@ public:
     pair<int, int> UpdateFilledRows();
     void Init();
     void Restart();
-    void AddDebuff();
-    void UpdateDebuffs();
     void UpdateScore(int, int);
     void UpdateNextBlock();
     void AddBlock(Block &);
     void SetNoRandom(bool flag, string filename = "");
+    void CheckAddAsteriskBlock(bool didClearRow);
 
     const vector<vector<pair<char, shared_ptr<Block>>>> &GetGrid() const;
     const int GetLevel() const;

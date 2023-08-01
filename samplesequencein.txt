@@ -1,6 +1,14 @@
+I drop
 drop
+I drop
 drop
+I 4ri drop
 drop
+I 4ri drop
+drop
+O 8ri drop
+drop
+I clock 11ri drop
+heavy
 right
 right
-drop

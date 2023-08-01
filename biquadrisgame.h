@@ -31,6 +31,7 @@ public:
 
     istream& GetInputStream();
     void SetSequence(string filename);
+    Board& GetOtherBoard(Board& board);
 };
 
 #endif

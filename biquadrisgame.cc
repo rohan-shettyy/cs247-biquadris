@@ -126,7 +126,7 @@ void BiquadrisGame::Print()
     {
         for (int j = 0; j < 11; j++)
         {
-            if (p2board->isBlinded && 2 <= j && j <= 8 && 5 <= i && i <= 14)
+            if (p1board->isBlinded && 2 <= j && j <= 8 && 5 <= i && i <= 14)
             {
                 cout << "?";
             }
@@ -235,4 +235,16 @@ void BiquadrisGame::SetSequence(string filename)
     sequenceIn.close();
     sequenceIn.open(filename);
     useSequence = true;
+}
+
+Board& BiquadrisGame::GetOtherBoard(Board& board)
+{
+    if (&board == p1board.get())
+    {
+        return *p2board;
+    }
+    else
+    {
+        return *p1board;
+    }
 }
