@@ -14,6 +14,7 @@ BiquadrisGame::BiquadrisGame(ifstream& in, string scriptfile1, string scriptfile
                                                                                                                             scriptfile2{scriptfile2},
                                                                                                                             startLevel{level},
                                                                                                                             textOnly{textOnly},
+                                                                                                                            graphics{},
                                                                                                                             p1board{unique_ptr<Board>(new Board(this, scriptfile1, level))}, 
                                                                                                                             p2board{unique_ptr<Board>(new Board(this, scriptfile2, level))},
                                                                                                                             cmdManager{unique_ptr<CommandManager>(new CommandManager())},
@@ -82,6 +83,7 @@ void BiquadrisGame::TakeTurn()
         if (!textOnly)
         {
             // Render
+            graphics.Render(*p1board, *p2board);
         }
         string input;
         int mult;

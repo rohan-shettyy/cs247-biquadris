@@ -1,6 +1,7 @@
 #ifndef BIQUADRISGAME_H
 #define BIQUADRISGAME_H
 
+#include "graphics.h"
 #include "board.h"
 #include "commands/commandmanager.h"
 
@@ -16,6 +17,8 @@ class BiquadrisGame
     string scriptfile2;
     int startLevel;
     bool textOnly;
+
+    Graphics graphics;
 
 public:
     unique_ptr<Board> p1board;
