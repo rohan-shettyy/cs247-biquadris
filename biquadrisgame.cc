@@ -9,14 +9,18 @@
 
 using namespace std;
 
-BiquadrisGame::BiquadrisGame(ifstream& in) :    sequenceIn{in},
-                                                p1board{unique_ptr<Board>(new Board(this, "biquadris_sequence1.txt"))}, 
-                                                p2board{unique_ptr<Board>(new Board(this, "biquadris_sequence2.txt"))},
-                                                cmdManager{unique_ptr<CommandManager>(new CommandManager())},
-                                                p1turn{true}
-                                                {
-                                                    ScoreManager::hiScore = 0;
-                                                }
+BiquadrisGame::BiquadrisGame(ifstream& in, string scriptfile1, string scriptfile2, int level, bool textOnly) :    sequenceIn{in},
+                                                                                                                            scriptfile1{scriptfile1},
+                                                                                                                            scriptfile2{scriptfile2},
+                                                                                                                            startLevel{level},
+                                                                                                                            textOnly{textOnly},
+                                                                                                                            p1board{unique_ptr<Board>(new Board(this, scriptfile1, level))}, 
+                                                                                                                            p2board{unique_ptr<Board>(new Board(this, scriptfile2, level))},
+                                                                                                                            cmdManager{unique_ptr<CommandManager>(new CommandManager())},
+                                                                                                                            p1turn{true}
+                                                                                                                            {
+                                                                                                                                ScoreManager::hiScore = 0;
+                                                                                                                            }
 
 void BiquadrisGame::Init()
 {
@@ -39,8 +43,8 @@ void BiquadrisGame::Restart()
 {
     p1board->turnInProgress = false;
     p2board->turnInProgress = false;
-    p1board.reset(new Board(this, "biquadris_sequence1.txt"));
-    p2board.reset(new Board(this, "biquadris_sequence2.txt"));
+    p1board.reset(new Board(this, scriptfile1, startLevel));
+    p2board.reset(new Board(this, scriptfile2, startLevel));
     p1turn = false; // will toggle in TakeTurn()
     gameInProgress = false;
     shouldRestart = true;
@@ -75,6 +79,10 @@ void BiquadrisGame::TakeTurn()
     while (gameInProgress && activeBoard->turnInProgress)
     {
         Print();
+        if (!textOnly)
+        {
+            // Render
+        }
         string input;
         int mult;
         string command;

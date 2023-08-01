@@ -30,7 +30,7 @@ public:
     bool isBlinded = false;
     bool isHeavy = false;
 
-    Board(BiquadrisGame *game, string filename);
+    Board(BiquadrisGame *game, string filename, int startlevel);
     Block GenerateBlock();
     pair<int, int> UpdateFilledRows();
     void Init();

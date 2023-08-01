@@ -7,9 +7,8 @@
 #include "level.h"
 
 
-Level::Level(string filename, Board& board) : difficulty{0}, sequence{filename}, board{board}
+Level::Level(int diff, string filename, Board& board) : difficulty{diff}, sequence{filename}, board{board}
 {
-    // Constructor implementation
 }
 
 Block Level::chooseBlock()
@@ -90,7 +89,7 @@ Block Level::chooseBlock()
             tileType = 'T';
         }
     }
-    else if (difficulty == 3)
+    else if (difficulty >= 3)
     {
         int random = rand() % 9;
         if (random == 0 || random == 1)
@@ -121,11 +120,6 @@ Block Level::chooseBlock()
         {
             tileType = 'T';
         }
-    }
-    else
-    {
-        // implement further difficulty levels
-        tileType = 'S';
     }
 
     Block chosenBlock{tileType, difficulty};

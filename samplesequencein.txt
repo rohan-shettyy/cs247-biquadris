@@ -9,6 +9,6 @@ drop
 O 8ri drop
 drop
 I clock 11ri drop
-heavy
-right
-right
+blind
+4ri drop
+drop

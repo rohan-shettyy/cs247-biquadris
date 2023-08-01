@@ -8,41 +8,39 @@
 
 using namespace std;
 
-void printBlock(Block &s, vector<vector<char>> &grid, vector<pair<int, int>> &coords)
-{
-    cout << "Printing grid" << endl;
-    coords = s.getCoords();
-    grid = vector<vector<char>>(18, vector<char>(11, '_'));
-    for (auto c : coords)
-    {
-        grid[c.first][c.second] = 'X';
-    }
-    for (int i = 0; i < 18; i++)
-    {
-        for (int j = 0; j < 11; j++)
-        {
-            cout << grid[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
 int main(int argc, char **argv)
 {
-    // Board board = Board();
-    // Block s = Block('S', 1);
-
-    // vector<vector<char>> grid;
-    // vector<pair<int, int>> coords;
-
-    // printBlock(s, grid, coords);
-    // s.rotate(true);
-    // printBlock(s, grid, coords);
-
-    /*s.rotate(false);
-    cout << "grid: clockwise" << endl;
-    printBlock(s, grid, coords);*/
+    int level = 0;
+    string scriptfile1 = "sequence1.txt";
+    string scriptfile2 = "sequence2.txt";
+    bool textOnly = false;
+    int seed = 1;
+    for (int i = 0; i < argc; i++)
+    {
+        string arg = argv[i];
+        if (arg == "-text")
+        {
+            textOnly = true;
+        }
+        else if (arg == "-seed")
+        {
+            seed = stoi(argv[i + 1]);
+        }
+        else if (arg == "-scriptfile1")
+        {
+            scriptfile1 = argv[i + 1];
+        }
+        else if (arg == "-scriptfile2")
+        {
+            scriptfile2 = argv[i + 1];
+        }
+        else if (arg == "-startlevel")
+        {
+            level = stoi(argv[i + 1]);
+        }
+    }
+    srand(seed);
     ifstream in;
-    BiquadrisGame game = BiquadrisGame(in);
+    BiquadrisGame game = BiquadrisGame(in, scriptfile1, scriptfile2, level, textOnly);
     game.Init();
 }

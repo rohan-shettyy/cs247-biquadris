@@ -12,6 +12,11 @@ class BiquadrisGame
     
     ifstream& sequenceIn;
 
+    string scriptfile1;
+    string scriptfile2;
+    int startLevel;
+    bool textOnly;
+
 public:
     unique_ptr<Board> p1board;
     unique_ptr<Board> p2board;
@@ -19,7 +24,7 @@ public:
 
     bool p1turn;
 
-    BiquadrisGame(ifstream& in);
+    BiquadrisGame(ifstream& in, string scriptfile1, string scriptfile2, int level, bool textOnly);
 
     void Init();
     void Restart();

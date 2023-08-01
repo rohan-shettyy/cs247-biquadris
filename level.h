@@ -17,8 +17,8 @@ class Level
     Board &board;
 
 public:
-    int turnsWithoutClearing = 0; // TODO: Difficulty 4
-    Level(string filename, Board& board);
+    int turnsWithoutClearing = 0;
+    Level(int diff, string filename, Board& board);
     Block chooseBlock();
     const int GetDifficulty() const;
     void SetLevel(int);
