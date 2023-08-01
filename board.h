@@ -16,7 +16,7 @@ class Board
     vector<vector<pair<char, shared_ptr<Block>>>> board;
     shared_ptr<Block> currBlock;
     shared_ptr<Block> nextBlock;
-    BiquadrisGame* game; // not ownership
+    BiquadrisGame *game; // not ownership
     unique_ptr<ScoreManager> scoreManager;
     // vector<Debuff> debuffs;
     // CommandManager commandManager;
@@ -29,24 +29,24 @@ public:
     bool isBlinded = false;
     bool isHeavy = false;
 
-    Board(BiquadrisGame* game, string filename);
+    Board(BiquadrisGame *game, string filename);
     Block generateBlock();
-    void updateFilledRows(int);
+    int updateFilledRows();
     void Init();
     void restart();
     void addDebuff();
     void updateDebuffs();
     void UpdateNextBlock();
-    void AddBlock(Block&);
+    void AddBlock(Block &);
     void SetNoRandom(bool flag, string filename = "");
 
     const vector<vector<pair<char, shared_ptr<Block>>>> &GetGrid() const;
     const int GetLevel() const;
     void SetLevel(int);
     const int GetScore() const;
-    Block& GetCurrBlock() const;
-    const Block& GetNextBlock() const;
-    BiquadrisGame& GetGame() const;
+    Block &GetCurrBlock() const;
+    const Block &GetNextBlock() const;
+    BiquadrisGame &GetGame() const;
 };
 
 #endif

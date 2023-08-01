@@ -26,10 +26,12 @@ public:
     void rotate(bool, Board &);
     void shift(char, Board &);
     void drop(Board &);
-    const vector<pair<int, int>>& getCoords() const;
+    const vector<pair<int, int>> &getCoords() const;
     void ShiftCoords(int, int);
     const char GetType() const;
     pair<int, int> getLeft() const;
+    void deleteCoord(int, int);
+    void shiftDownCoord(int, int);
 };
 
 #endif

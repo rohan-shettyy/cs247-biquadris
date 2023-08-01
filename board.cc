@@ -1,19 +1,21 @@
 #include <vector>
 #include <memory>
 #include <string>
-
+#include <iostream>
 #include "biquadrisgame.h"
 #include "block.h"
 
 #include "board.h"
 
+using namespace std;
+
 // Constructor
-Board::Board(BiquadrisGame* game, string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
-                                                                currBlock{nullptr},
-                                                                nextBlock{nullptr},
-                                                                game{game},
-                                                                scoreManager{make_unique<ScoreManager>()},
-                                                                level{filename, *this}
+Board::Board(BiquadrisGame *game, string filename) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
+                                                     currBlock{nullptr},
+                                                     nextBlock{nullptr},
+                                                     game{game},
+                                                     scoreManager{make_unique<ScoreManager>()},
+                                                     level{filename, *this}
 {
 }
 
@@ -28,10 +30,45 @@ Block Board::generateBlock()
     return level.chooseBlock();
 }
 
-void Board::updateFilledRows(int numRows)
+int Board::updateFilledRows()
 {
+    int count = 0;
     // Implement the logic to update the filled rows on the board
-    // You can use the 'numRows' parameter to indicate how many rows were filled
+    // returns number of rows filled
+    for (int row = 3; row < 18; row++)
+    {
+        bool fullRow = true;
+        for (int col = 0; col < 11; col++)
+        {
+            if (board[row][col].second == nullptr)
+            {
+                fullRow = false;
+            }
+        }
+        if (fullRow)
+        {
+            count++;
+            for (int col = 0; col < 11; col++)
+            {
+                board[row][col].second->deleteCoord(row, col);
+                board[row][col] = {' ', nullptr};
+            }
+            // iterate up from the row to move all the blocks
+            for (int i = row - 1; i >= 3; i--)
+            {
+                for (int j = 0; j < 11; j++)
+                {
+                    if (board[i][j].second != nullptr)
+                    {
+                        board[i + 1][j] = board[i][j];
+                        board[i + 1][j].second->shiftDownCoord(i, j);
+                        board[i][j] = {' ', nullptr};
+                    }
+                }
+            }
+        }
+    }
+    return count;
 }
 
 void Board::restart()
@@ -77,7 +114,7 @@ void Board::UpdateNextBlock()
 }
 
 // assuming we can add the block to the board and there is no overlap
-void Board::AddBlock(Block& block)
+void Board::AddBlock(Block &block)
 {
     vector<pair<int, int>> coords = block.getCoords();
     for (int i = 0; i < static_cast<int>(coords.size()); i++)
@@ -114,17 +151,17 @@ const int Board::GetScore() const
     return scoreManager->GetScore();
 }
 
-Block& Board::GetCurrBlock() const
+Block &Board::GetCurrBlock() const
 {
     return *currBlock;
 }
 
-const Block& Board::GetNextBlock() const
+const Block &Board::GetNextBlock() const
 {
     return *nextBlock;
 }
 
-BiquadrisGame& Board::GetGame() const
+BiquadrisGame &Board::GetGame() const
 {
     return *game;
 }

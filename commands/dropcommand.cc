@@ -15,6 +15,7 @@ void DropCommand::Call(Board &board)
 {
     board.GetCurrBlock().drop(board);
     board.AddBlock(board.GetCurrBlock());
+    int filledRows = board.updateFilledRows();
     board.turnInProgress = false;
     board.UpdateNextBlock();
 }

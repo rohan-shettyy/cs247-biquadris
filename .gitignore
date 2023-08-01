@@ -1,3 +1,5 @@
 *.o
 *.d
 output.log
+commands/*.o
+commands/*.d
