@@ -86,8 +86,7 @@ Block::Block(char type, int level) : bottomLeft{3, 0}, type{type}, level{level}
         bottomLeft = {0, 5};
         break;
     default:
-        cout << "block creation on invalid character: " + type << endl;
-        // throw runtime_error("Block creation was called on invalid character: " + type);
+        throw runtime_error("Block creation was called on invalid character: " + type);
         break;
     }
 }
@@ -280,4 +279,9 @@ void Block::shiftDownCoord(int row, int col)
             return;
         }
     }
+}
+
+int Block::GetLevel() const
+{
+    return level;
 }

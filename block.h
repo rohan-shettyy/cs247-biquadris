@@ -32,6 +32,7 @@ public:
     pair<int, int> getLeft() const;
     void deleteCoord(int, int);
     void shiftDownCoord(int, int);
+    int GetLevel() const;
 };
 
 #endif

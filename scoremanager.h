@@ -6,12 +6,13 @@ using namespace std;
 class ScoreManager
 {
     int score;
+
 public:
     static int hiScore;
 
     ScoreManager();
 
-    void update(int, int);
+    void update(int, int, int);
 
     const int GetScore() const;
 };

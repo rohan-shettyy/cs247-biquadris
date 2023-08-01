@@ -21,18 +21,19 @@ Board::Board(BiquadrisGame *game, string filename) : board{18, vector<pair<char,
 
 void Board::Init()
 {
-    currBlock = make_shared<Block>(generateBlock());
-    nextBlock = make_shared<Block>(generateBlock());
+    currBlock = make_shared<Block>(GenerateBlock());
+    nextBlock = make_shared<Block>(GenerateBlock());
 }
 
-Block Board::generateBlock()
+Block Board::GenerateBlock()
 {
     return level.chooseBlock();
 }
 
-int Board::updateFilledRows()
+pair<int, int> Board::UpdateFilledRows()
 {
     int count = 0;
+    int bonus = 0;
     // Implement the logic to update the filled rows on the board
     // returns number of rows filled
     for (int row = 3; row < 18; row++)
@@ -68,10 +69,23 @@ int Board::updateFilledRows()
             }
         }
     }
-    return count;
+    // get and clear all the blocks that were cleared from the rows
+    for (auto it = blocks.begin(); it != blocks.end();)
+    {
+        if ((*it).use_count() == 1) // only the blocks vector contains a pointer to the block
+        {
+            bonus += (*it)->GetLevel();
+            it = blocks.erase(it);
+        }
+        else
+        {
+            it++;
+        }
+    }
+    return {count, bonus};
 }
 
-void Board::restart()
+void Board::Restart()
 {
     // Implement the logic to restart the game
     // Reset the board and other necessary data members
@@ -86,16 +100,21 @@ void Board::restart()
     nextBlock = nullptr;
 }
 
-void Board::addDebuff()
+void Board::AddDebuff()
 {
     // Implement the logic to add a debuff to the board
     // Update the 'debuffs' vector or perform other necessary actions
 }
 
-void Board::updateDebuffs()
+void Board::UpdateDebuffs()
 {
     // Implement the logic to update the debuffs on the board
     // Update the 'debuffs' vector or perform other necessary actions
+}
+
+void Board::UpdateScore(int rows, int blocksCleared)
+{
+    scoreManager->update(GetLevel(), rows, blocksCleared);
 }
 
 void Board::UpdateNextBlock()
@@ -110,7 +129,7 @@ void Board::UpdateNextBlock()
             return;
         }
     }
-    nextBlock = make_shared<Block>(generateBlock());
+    nextBlock = make_shared<Block>(GenerateBlock());
 }
 
 // assuming we can add the block to the board and there is no overlap
@@ -124,6 +143,7 @@ void Board::AddBlock(Block &block)
         shared_ptr<Block> copiedPtr = make_shared<Block>(block);
         board[row][col] = pair<char, shared_ptr<Block>>(block.GetType(), copiedPtr);
     }
+    blocks.push_back(make_shared<Block>(block));
 }
 
 void Board::SetNoRandom(bool flag, string filename)

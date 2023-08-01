@@ -14,6 +14,7 @@ class BiquadrisGame;
 class Board
 {
     vector<vector<pair<char, shared_ptr<Block>>>> board;
+    vector<shared_ptr<Block>> blocks;
     shared_ptr<Block> currBlock;
     shared_ptr<Block> nextBlock;
     BiquadrisGame *game; // not ownership
@@ -30,12 +31,13 @@ public:
     bool isHeavy = false;
 
     Board(BiquadrisGame *game, string filename);
-    Block generateBlock();
-    int updateFilledRows();
+    Block GenerateBlock();
+    pair<int, int> UpdateFilledRows();
     void Init();
-    void restart();
-    void addDebuff();
-    void updateDebuffs();
+    void Restart();
+    void AddDebuff();
+    void UpdateDebuffs();
+    void UpdateScore(int, int);
     void UpdateNextBlock();
     void AddBlock(Block &);
     void SetNoRandom(bool flag, string filename = "");
