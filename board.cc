@@ -199,3 +199,4 @@ BiquadrisGame &Board::GetGame() const
 {
     return *game;
 }
+

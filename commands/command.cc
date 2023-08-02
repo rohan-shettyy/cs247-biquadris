@@ -50,3 +50,4 @@ bool Command::CheckCommand(string command)
     
     return false;
 }
+

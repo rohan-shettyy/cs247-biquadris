@@ -18,3 +18,4 @@ void LevelUpCommand::Call(Board &board)
         board.SetLevel(level + 1);
     }
 }
+

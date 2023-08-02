@@ -14,3 +14,4 @@ void CounterclockwiseCommand::Call(Board &board)
 {
     board.GetCurrBlock().rotate(false, board);
 }
+

@@ -19,8 +19,6 @@ class Board
     shared_ptr<Block> nextBlock;
     BiquadrisGame *game; // not ownership
     unique_ptr<ScoreManager> scoreManager;
-    // vector<Debuff> debuffs;
-    // CommandManager commandManager;
     Level level;
 
 public:
@@ -52,3 +50,4 @@ public:
 };
 
 #endif
+

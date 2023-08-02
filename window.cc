@@ -166,11 +166,6 @@ void Xwindow::drawBoard(Board &board, int startX, int startY, int squareWidth)
 
 void Xwindow::drawScreen(Board &b1, Board &b2)
 {
-  /*int p1score = b1.GetScore();
-  int p2score = b2.GetScore();
-  int p1High = b1.GetHighScore();
-  int p2High = b2.GetHighScore();*/
-
   int blockWidth = height / 25;
   fillRectangle(0, 0, width, blockWidth + 60, Grey);
 
@@ -190,3 +185,4 @@ void Xwindow::drawScreen(Board &b1, Board &b2)
   // Flush the output to make sure the update is visible
   XFlush(d);
 }
+

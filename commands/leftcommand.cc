@@ -14,3 +14,4 @@ void LeftCommand::Call(Board &board)
 {
     board.GetCurrBlock().shift('l', board);
 }
+

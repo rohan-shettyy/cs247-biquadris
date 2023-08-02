@@ -56,3 +56,4 @@ void DropCommand::Call(Board &board)
     board.turnInProgress = false;
     board.UpdateNextBlock();
 }
+

@@ -32,3 +32,4 @@ void BlockCommand::Call(Board &board)
         cout << "Cannot replace block: Invalid location" << endl;
     }
 }
+

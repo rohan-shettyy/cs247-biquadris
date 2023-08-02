@@ -114,3 +114,4 @@ void CommandManager::CallCommand(Board &board, string command, int multiplicity)
     }
     cout << "Invalid command" << endl;
 }
+

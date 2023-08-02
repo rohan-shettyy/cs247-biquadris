@@ -14,3 +14,4 @@ void DownCommand::Call(Board &board)
 {
     board.GetCurrBlock().shift('d', board);
 }
+

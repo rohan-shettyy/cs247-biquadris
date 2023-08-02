@@ -15,3 +15,4 @@ void RestartCommand::Call(Board &board)
 {
     board.GetGame().Restart();
 }
+

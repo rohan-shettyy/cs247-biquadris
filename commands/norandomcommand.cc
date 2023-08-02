@@ -19,3 +19,4 @@ void NorandomCommand::Call(Board &board)
     board.GetGame().GetInputStream() >> file;
     board.SetNoRandom(true, file);
 }
+

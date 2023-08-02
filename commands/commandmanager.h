@@ -21,3 +21,4 @@ public:
     void AddCommand(string fullcommand, Command* commandObj);
 };
 #endif
+

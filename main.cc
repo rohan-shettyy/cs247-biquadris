@@ -44,3 +44,4 @@ int main(int argc, char **argv)
     BiquadrisGame game{in, scriptfile1, scriptfile2, level, textOnly};
     game.Init();
 }
+

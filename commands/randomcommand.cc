@@ -14,3 +14,4 @@ void RandomCommand::Call(Board &board)
 {
     board.SetNoRandom(false);
 }
+

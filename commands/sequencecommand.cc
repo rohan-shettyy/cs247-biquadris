@@ -21,3 +21,4 @@ void SequenceCommand::Call(Board &board)
 
     board.GetGame().SetSequence(filename);
 }
+
