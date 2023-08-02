@@ -45,6 +45,7 @@ public:
     const int GetLevel() const;
     void SetLevel(int);
     const int GetScore() const;
+    const int GetHighScore() const;
     Block &GetCurrBlock() const;
     const Block &GetNextBlock() const;
     BiquadrisGame &GetGame() const;

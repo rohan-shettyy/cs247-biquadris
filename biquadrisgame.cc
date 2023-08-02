@@ -9,19 +9,19 @@
 
 using namespace std;
 
-BiquadrisGame::BiquadrisGame(ifstream& in, string scriptfile1, string scriptfile2, int level, bool textOnly) :    sequenceIn{in},
-                                                                                                                            scriptfile1{scriptfile1},
-                                                                                                                            scriptfile2{scriptfile2},
-                                                                                                                            startLevel{level},
-                                                                                                                            textOnly{textOnly},
-                                                                                                                            graphics{},
-                                                                                                                            p1board{unique_ptr<Board>(new Board(this, scriptfile1, level))}, 
-                                                                                                                            p2board{unique_ptr<Board>(new Board(this, scriptfile2, level))},
-                                                                                                                            cmdManager{unique_ptr<CommandManager>(new CommandManager())},
-                                                                                                                            p1turn{true}
-                                                                                                                            {
-                                                                                                                                ScoreManager::hiScore = 0;
-                                                                                                                            }
+BiquadrisGame::BiquadrisGame(ifstream &in, string scriptfile1, string scriptfile2, int level, bool textOnly) : sequenceIn{in},
+                                                                                                               scriptfile1{scriptfile1},
+                                                                                                               scriptfile2{scriptfile2},
+                                                                                                               startLevel{level},
+                                                                                                               textOnly{textOnly},
+                                                                                                               graphics{},
+                                                                                                               p1board{unique_ptr<Board>(new Board(this, scriptfile1, level))},
+                                                                                                               p2board{unique_ptr<Board>(new Board(this, scriptfile2, level))},
+                                                                                                               cmdManager{unique_ptr<CommandManager>(new CommandManager())},
+                                                                                                               p1turn{true}
+{
+    ScoreManager::hiScore = 0;
+}
 
 void BiquadrisGame::Init()
 {
@@ -51,7 +51,7 @@ void BiquadrisGame::Restart()
     shouldRestart = true;
 }
 
-void BiquadrisGame::Terminate(Board& board)
+void BiquadrisGame::Terminate(Board &board)
 {
     gameInProgress = false;
     if (&board == p1board.get())
@@ -66,7 +66,7 @@ void BiquadrisGame::Terminate(Board& board)
 
 void BiquadrisGame::TakeTurn()
 {
-    Board* activeBoard = p1board.get();
+    Board *activeBoard = p1board.get();
     if (p1turn)
     {
         cout << "Player 1's turn:" << endl;
@@ -101,19 +101,28 @@ void BiquadrisGame::TakeTurn()
         iss.clear();
         iss >> command;
         cmdManager->CallCommand(*activeBoard, command, mult);
-
     }
     p1turn = !p1turn;
 }
 
 void BiquadrisGame::Print()
 {
-    const vector<vector<pair<char, shared_ptr<Block>>>>& p1grid = p1board->GetGrid();
-    const vector<vector<pair<char, shared_ptr<Block>>>>& p2grid = p2board->GetGrid();
-    
-    cout << "Level:    " << p1board->GetLevel() << "      " << "Level:    " << p2board->GetLevel() << endl;
+    const vector<vector<pair<char, shared_ptr<Block>>>> &p1grid = p1board->GetGrid();
+    const vector<vector<pair<char, shared_ptr<Block>>>> &p2grid = p2board->GetGrid();
+
+    int high = p1board->GetHighScore();
+    for (int j = 0; j < 12 - (int)to_string(high).length(); j++)
+    {
+        cout << " ";
+    }
+    cout << "High: ";
+    cout << high << endl;
+
+    cout << "Level:    " << p1board->GetLevel() << "      "
+         << "Level:    " << p2board->GetLevel() << endl;
     int p1score = p1board->GetScore();
     int p2score = p2board->GetScore();
+
     cout << "Score:";
     for (int j = 0; j < 5 - (int)to_string(p1score).length(); j++)
     {
@@ -129,8 +138,8 @@ void BiquadrisGame::Print()
 
     cout << "-----------      -----------" << endl;
 
-    const vector<pair<int, int>>& p1CurrBlock = p1board->GetCurrBlock().getCoords();
-    const vector<pair<int, int>>& p2CurrBlock = p2board->GetCurrBlock().getCoords();
+    const vector<pair<int, int>> &p1CurrBlock = p1board->GetCurrBlock().getCoords();
+    const vector<pair<int, int>> &p2CurrBlock = p2board->GetCurrBlock().getCoords();
 
     for (int i = 0; i < 18; i++)
     {
@@ -186,13 +195,13 @@ void BiquadrisGame::Print()
 
     cout << "-----------      -----------" << endl;
 
-    const vector<pair<int, int>>& p1NextBlock = p1board->GetNextBlock().getCoords();
-    const vector<pair<int, int>>& p2NextBlock = p2board->GetNextBlock().getCoords();
+    const vector<pair<int, int>> &p1NextBlock = p1board->GetNextBlock().getCoords();
+    const vector<pair<int, int>> &p2NextBlock = p2board->GetNextBlock().getCoords();
     char p1NextBlockGrid[2][4];
     char p2NextBlockGrid[2][4];
     for (int i = 0; i < 2; i++)
     {
-        for (int j = 0; j < 4; j++) 
+        for (int j = 0; j < 4; j++)
         {
             p1NextBlockGrid[i][j] = ' ';
             p2NextBlockGrid[i][j] = ' ';
@@ -228,7 +237,7 @@ void BiquadrisGame::SetGameInProgress(bool inProgress)
     gameInProgress = inProgress;
 }
 
-istream& BiquadrisGame::GetInputStream()
+istream &BiquadrisGame::GetInputStream()
 {
     if (useSequence)
     {
@@ -247,7 +256,7 @@ void BiquadrisGame::SetSequence(string filename)
     useSequence = true;
 }
 
-Board& BiquadrisGame::GetOtherBoard(Board& board)
+Board &BiquadrisGame::GetOtherBoard(Board &board)
 {
     if (&board == p1board.get())
     {

@@ -7,9 +7,10 @@
 class Graphics
 {
     Xwindow w;
+
 public:
     Graphics();
-    void Render(Board& p1board, Board& p2board);
+    void Render(Board &p1board, Board &p2board);
 };
 
 #endif

@@ -10,12 +10,12 @@
 using namespace std;
 
 // Constructor
-Board::Board(BiquadrisGame *game, string filename, int startlevel) :  board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
-                                                                                currBlock{nullptr},
-                                                                                nextBlock{nullptr},
-                                                                                game{game},
-                                                                                scoreManager{make_unique<ScoreManager>()},
-                                                                                level{startlevel, filename, *this}
+Board::Board(BiquadrisGame *game, string filename, int startlevel) : board{18, vector<pair<char, shared_ptr<Block>>>{11, {' ', nullptr}}},
+                                                                     currBlock{nullptr},
+                                                                     nextBlock{nullptr},
+                                                                     game{game},
+                                                                     scoreManager{make_unique<ScoreManager>()},
+                                                                     level{startlevel, filename, *this}
 {
 }
 
@@ -178,6 +178,11 @@ void Board::SetLevel(int l)
 const int Board::GetScore() const
 {
     return scoreManager->GetScore();
+}
+
+const int Board::GetHighScore() const
+{
+    return ScoreManager::hiScore;
 }
 
 Block &Board::GetCurrBlock() const

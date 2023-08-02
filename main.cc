@@ -41,6 +41,6 @@ int main(int argc, char **argv)
     }
     srand(seed);
     ifstream in;
-    BiquadrisGame game = BiquadrisGame(in, scriptfile1, scriptfile2, level, textOnly);
+    BiquadrisGame game{in, scriptfile1, scriptfile2, level, textOnly};
     game.Init();
 }

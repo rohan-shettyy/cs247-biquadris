@@ -15,6 +15,7 @@ public:
     void update(int, int, int);
 
     const int GetScore() const;
+    const int GetHighScore() const;
 };
 
 #endif
