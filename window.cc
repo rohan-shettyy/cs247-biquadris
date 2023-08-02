@@ -166,8 +166,8 @@ void Xwindow::drawBoard(Board &board, int startX, int startY, int squareWidth)
 
 void Xwindow::drawScreen(Board &b1, Board &b2)
 {
-  int blockWidth = height / 25;
-  fillRectangle(0, 0, width, blockWidth + 60, Grey);
+  int blockWidth = height / 22;
+  fillRectangle(0, 0, width, height, Grey);
 
   drawString(width / 2 - 1.5 * blockWidth, blockWidth, "High: " + to_string(b1.GetHighScore()));
   drawString(blockWidth, blockWidth + 20, "Level: " + to_string(b1.GetLevel()));
@@ -185,4 +185,3 @@ void Xwindow::drawScreen(Board &b1, Board &b2)
   // Flush the output to make sure the update is visible
   XFlush(d);
 }
-
