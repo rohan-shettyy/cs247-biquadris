@@ -144,7 +144,7 @@ void Block::rotate(bool clockwise, Board &board)
 
     if (!checkBounds(newCoords) || !checkBoard(newCoords, board))
     {
-        // return;
+        return;
     }
     // update the coords
     for (int i = 0; i < static_cast<int>(coords.size()); i++)
